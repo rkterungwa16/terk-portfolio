@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Richard Terungwa Kombol - Senior Software Engineer</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e16;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1a202e;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #fb923c;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --text-muted: #6b7280;
+            --border: #1f2937;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(251, 146, 60, 0.08) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(251, 146, 60, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(251, 146, 60, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .greeting {
+            font-size: 1.125rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .hero-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .hero-title .bracket {
+            color: var(--accent-orange);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+        }
+
+        .btn-primary:hover {
+            background: #0891b2;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-orange);
+            color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.875rem 1.25rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-orange));
+            transition: left 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(6, 182, 212, 0.2);
+        }
+
+        .skill-tag:hover::before {
+            left: 0;
+        }
+
+        /* Experience Section */
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .experience-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--border);
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        .experience-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .experience-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--accent-orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-company {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.15);
+        }
+
+        .project-name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .project-role {
+            color: var(--accent-cyan);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border-radius: 4px;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .project-highlights li {
+            color: var(--text-muted);
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
+        .project-highlights li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-orange);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent-orange);
+            gap: 0.75rem;
+        }
+
+        /* Personal Projects */
+        .personal-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .personal-project-card {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .personal-project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-orange));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .personal-project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .personal-project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .contact-value a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--accent-orange);
+        }
+
+        /* Education Section */
+        .education-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            max-width: 600px;
+        }
+
+        .education-degree {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-school {
+            color: var(--accent-cyan);
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        .footer-text span {
+            color: var(--accent-cyan);
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 4rem 1.5rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .experience-item {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Portfolio = () => {
+            useEffect(() => {
+                const observerOptions = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+                return () => observer.disconnect();
+            }, []);
+
+            const skills = [
+                'React.js', 'Next.js', 'Node.js', 'Nest.js',
+                'TypeScript', 'JavaScript', 'Jotai', 'Redux', 'Zustand',
+                'Material UI', 'Tailwind', 'MongoDB', 'PostgreSQL',
+                'Express.js', 'Angular', 'PHP/Laravel'
+            ];
+
+            const experiences = [
+                {
+                    date: 'April 2021 - Present',
+                    title: 'Senior Software Engineer',
+                    company: 'CauseOfAKind, NY, United States',
+                    projects: [
+                        {
+                            name: 'Lives and Livelihoods Fund',
+                            role: 'Lead Frontend Engineer',
+                            tech: ['React', 'Next.js', 'Strapi CMS', 'framer-motion', 'react-transition-group'],
+                            url: 'https://www.livesandlivelihoodsfund.org/en',
+                            highlights: [
+                                'Architected the frontend codebase to achieve the desired UI layout',
+                                'Implemented a custom grid system for responsive layout',
+                                'Built custom components: Modal, RadioGroup, Bar Chart, and Circular progress bar'
+                            ]
+                        },
+                        {
+                            name: 'Peeq Disco (Media Disco)',
+                            role: 'Software Engineer',
+                            tech: ['React', 'Next.js', 'Nest.js', 'Faunadb', 'Algolia', 'Stripe', 'Jotai', 'Redux'],
+                            url: 'https://beta.peeqdisco.com',
+                            highlights: [
+                                'Built custom components: Slide out container, OTP form input, Toaster, Modals',
+                                'Implemented role-based account creation process',
+                                'Integrated Algolia search and filter (front and backend)',
+                                'Integrated Subscription service with multiple plans'
+                            ]
+                        },
+                        {
+                            name: 'Grow Therapy',
+                            role: 'Lead Frontend Engineer',
+                            tech: ['React', 'Astro', 'WordPress CMS'],
+                            url: 'https://growtherapy.com/',
+                            highlights: [
+                                'Standardized component layout for consistency with designs',
+                                'Built custom React filter component for therapist search',
+                                'Created dynamic custom components configurable from WordPress CMS',
+                                'Integrated gravity forms'
+                            ]
+                        },
+                        {
+                            name: 'Civics Academy',
+                            role: 'Lead Frontend Engineer',
+                            tech: ['React', 'Next.js', 'Payload CMS', 'Tailwind'],
+                            url: 'https://civics-academy.vercel.app/',
+                            highlights: [
+                                'Implemented different custom carousel components'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    date: 'September 2019 - December 2020',
+                    title: 'Lead Frontend Developer',
+                    company: 'Nabimusic Ltd, NY, United States',
+                    projects: [
+                        {
+                            name: 'Nabimusic Platform',
+                            role: 'Lead Frontend Developer',
+                            tech: ['React', 'TypeScript', 'Next.js', 'Material UI', 'Jest', 'Redux'],
+                            url: 'https://github.com/iamvane/nabiui_next',
+                            highlights: [
+                                'Implemented frontend to schedule trials for students',
+                                'Built feature for students to request lessons',
+                                'Implemented lesson rescheduling in calendar',
+                                'Created feature to rate instructors'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    date: 'April 2018 - October 2019',
+                    title: 'Fullstack Software Developer',
+                    company: 'Fisshbone and Lestr, Victoria Island, Lagos, Nigeria',
+                    projects: [
+                        {
+                            name: "Quickteller's SVA API Integration",
+                            role: 'Lead Engineer',
+                            tech: ['Node.js', 'Mocha', 'Chai', 'Quickteller SVA API', 'Nock'],
+                            url: 'https://github.com/rkterungwa16/quickteller-sva-node',
+                            highlights: [
+                                'Built a library in Node.js to consume required APIs',
+                                'Enabled features like buying Airtime for users'
+                            ]
+                        },
+                        {
+                            name: 'Wakanow Flight Booking API Integration',
+                            role: 'Lead Engineer',
+                            tech: ['TypeScript', 'Node.js'],
+                            url: 'https://github.com/rkterungwa16/wakanow-node',
+                            highlights: [
+                                'Built a library in TypeScript to consume flight booking APIs',
+                                'Successfully integrated the library to enable customer flight booking'
+                            ]
+                        },
+                        {
+                            name: 'Admin Dashboard',
+                            role: 'Lead Engineer Frontend',
+                            tech: ['React', 'React-Apollo'],
+                            highlights: [
+                                'Created admin dashboard for merchant management'
+                            ]
+                        }
+                    ]
+                }
+            ];
+
+            const personalProjects = [
+                {
+                    name: 'Custom React Combobox',
+                    tech: ['React', 'Cypress', 'Jest'],
+                    url: 'https://github.com/rkterungwa16/terkui-combobox',
+                    description: 'Reusable combobox component with comprehensive testing'
+                },
+                {
+                    name: 'Custom React File Upload',
+                    tech: ['React', 'XMLHttpRequest'],
+                    url: 'https://github.com/rkterungwa16/terkui-file-upload',
+                    description: 'Custom file upload component with progress tracking'
+                }
+            ];
+
+            return (
+                <>
+                    {/* Hero Section */}
+                    <section className="hero">
+                        <div className="grid-bg"></div>
+                        <div className="hero-content">
+                            <div className="greeting mono">Hello, I'm</div>
+                            <h1 className="hero-title">
+                                <span className="bracket">{'<'}</span>
+                                Richard Terungwa
+                                <span className="bracket">{' />'}</span>
+                            </h1>
+                            <p className="hero-subtitle">Senior Software Engineer</p>
+                            <p className="hero-description">
+                                Building scalable, user-centric web applications with modern JavaScript frameworks. 
+                                Specialized in React ecosystem and full-stack development.
+                            </p>
+                            <div className="hero-cta">
+                                <a href="#contact" className="btn btn-primary">Get In Touch</a>
+                                <a href="#experience" className="btn btn-secondary">View My Work</a>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Skills Section */}
+                    <section id="skills" className="fade-in">
+                        <div className="section-header">
+                            <div className="section-label mono">// Technical Arsenal</div>
+                            <h2 className="section-title">Skills & Technologies</h2>
+                        </div>
+                        <div className="skills-grid">
+                            {skills.map((skill, index) => (
+                                <div key={index} className="skill-tag">
+                                    {skill}
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Experience Section */}
+                    <section id="experience" className="fade-in">
+                        <div className="section-header">
+                            <div className="section-label mono">// Career Journey</div>
+                            <h2 className="section-title">Professional Experience</h2>
+                        </div>
+                        <div className="experience-list">
+                            {experiences.map((exp, index) => (
+                                <div key={index} className="experience-item">
+                                    <div className="experience-header">
+                                        <div className="experience-date">{exp.date}</div>
+                                        <h3 className="experience-title">{exp.title}</h3>
+                                        <div className="experience-company">{exp.company}</div>
+                                    </div>
+                                    <div className="projects-grid">
+                                        {exp.projects.map((project, pIndex) => (
+                                            <div key={pIndex} className="project-card">
+                                                <div className="project-name">{project.name}</div>
+                                                <div className="project-role">{project.role}</div>
+                                                <div className="project-tech">
+                                                    {project.tech.map((tech, tIndex) => (
+                                                        <span key={tIndex} className="tech-badge">{tech}</span>
+                                                    ))}
+                                                </div>
+                                                <ul className="project-highlights">
+                                                    {project.highlights.map((highlight, hIndex) => (
+                                                        <li key={hIndex}>{highlight}</li>
+                                                    ))}
+                                                </ul>
+                                                {project.url && (
+                                                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="project-link">
+                                                        View Project →
+                                                    </a>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Personal Projects */}
+                    <section id="projects" className="fade-in">
+                        <div className="section-header">
+                            <div className="section-label mono">// Side Projects</div>
+                            <h2 className="section-title">Personal Projects</h2>
+                        </div>
+                        <div className="personal-projects-grid">
+                            {personalProjects.map((project, index) => (
+                                <div key={index} className="personal-project-card">
+                                    <div className="project-name">{project.name}</div>
+                                    <div className="project-tech">
+                                        {project.tech.map((tech, tIndex) => (
+                                            <span key={tIndex} className="tech-badge">{tech}</span>
+                                        ))}
+                                    </div>
+                                    <p className="project-description">{project.description}</p>
+                                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="project-link">
+                                        View on GitHub →
+                                    </a>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Education */}
+                    <section id="education" className="fade-in">
+                        <div className="section-header">
+                            <div className="section-label mono">// Academic Background</div>
+                            <h2 className="section-title">Education</h2>
+                        </div>
+                        <div className="education-card">
+                            <h3 className="education-degree">B.Eng Civil Engineering</h3>
+                            <div className="education-school">Federal University of Agriculture, Makurdi, Nigeria</div>
+                            <div className="education-date">2004 - 2010</div>
+                        </div>
+                    </section>
+
+                    {/* Contact Section */}
+                    <section id="contact" className="fade-in">
+                        <div className="section-header">
+                            <div className="section-label mono">// Let's Connect</div>
+                            <h2 className="section-title">Get In Touch</h2>
+                        </div>
+                        <div className="contact-grid">
+                            <div className="contact-card">
+                                <div className="contact-icon">📧</div>
+                                <div className="contact-label mono">Email</div>
+                                <div className="contact-value">
+                                    <a href="mailto:terungwakombol@gmail.com">terungwakombol@gmail.com</a>
+                                </div>
+                            </div>
+                            <div className="contact-card">
+                                <div className="contact-icon">📱</div>
+                                <div className="contact-label mono">Phone</div>
+                                <div className="contact-value">+234 813 583 3305</div>
+                            </div>
+                            <div className="contact-card">
+                                <div className="contact-icon">📍</div>
+                                <div className="contact-label mono">Location</div>
+                                <div className="contact-value">Lagos, Nigeria</div>
+                            </div>
+                            <div className="contact-card">
+                                <div className="contact-icon">💼</div>
+                                <div className="contact-label mono">GitHub</div>
+                                <div className="contact-value">
+                                    <a href="https://github.com/rkterungwa16" target="_blank" rel="noopener noreferrer">
+                                        @rkterungwa16
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer>
+                        <p className="footer-text">
+                            Built with <span>❤️</span> by Richard Terungwa Kombol © 2024
+                        </p>
+                    </footer>
+                </>
+            );
+        };
+
+        ReactDOM.render(<Portfolio />, document.getElementById('root'));
+    </script>
+</body>
+</html>
