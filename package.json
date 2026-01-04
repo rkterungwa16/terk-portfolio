@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "build": "rsbuild build",
-    "dev": "rsbuild dev --open",
+    "dev": "cross-env NODE_OPTIONS=\"--experimental-vm-modules --no-warnings\" node ./server.mjs",
+    "start": "node ./prod-server.mjs",
+    "preview": "node ./prod-server.mjs",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "preview": "rsbuild preview",
     "test": "rstest",
     "test:watch": "rstest --watch"
   },
@@ -30,6 +31,7 @@
     "@types/express": "github:types/express",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "cross-env": "^10.1.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
