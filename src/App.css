@@ -416,17 +416,26 @@ section {
 .personal-project-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-orange));
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 270deg,
+    #00d4ff 360deg
+  );
+  border-radius: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  animation: rotate 3s linear infinite;
+  animation-play-state: paused;
 }
 
 .personal-project-card:hover::before {
-  transform: scaleX(1);
+  opacity: 1;
+  animation-play-state: running;
 }
 
 .personal-project-card:hover {

@@ -167,6 +167,12 @@ export const Portfolio = () => {
 
   const personalProjects = [
     {
+      name: 'Nenge',
+      tech: ["React", "Node.js", "Express.js", "Mongodb", "TypeScript", "CSS"],
+      url: 'https://terk-nenge-foto.vercel.app/',
+      description: 'Platform to connect with the best photographers',
+    },
+    {
       name: 'Custom React Combobox',
       tech: ['React', 'Cypress', 'Jest'],
       url: 'https://github.com/rkterungwa16/terkui-combobox',
