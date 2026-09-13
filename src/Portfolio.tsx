@@ -267,10 +267,16 @@ export const Portfolio = () => {
       description: 'Custom file upload component with progress tracking',
     },
     {
+      name: 'React Hotel Booking Website',
+      tech: ['React'],
+      url: 'https://github.com/rkterungwa16/terkstay',
+      description: 'Find the best hotels and rooms online. Modify the UI to your liking',
+    },
+    {
       name: 'React Photo Grid',
       tech: ['React', 'Virtualization'],
       url: 'https://github.com/rkterungwa16/terk-photo-grid',
-      description: '',
+      description: 'Virtualized photo grid with lazy loading and infinite scrolling',
     },
   ];
 
