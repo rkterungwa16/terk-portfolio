@@ -266,6 +266,12 @@ export const Portfolio = () => {
       url: 'https://github.com/rkterungwa16/terkui-file-upload',
       description: 'Custom file upload component with progress tracking',
     },
+    {
+      name: 'React Photo Grid',
+      tech: ['React', 'Virtualization'],
+      url: 'https://github.com/rkterungwa16/terk-photo-grid',
+      description: '',
+    },
   ];
 
   return (
