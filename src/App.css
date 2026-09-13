@@ -399,49 +399,72 @@ section {
   gap: 2rem;
 }
 
+
 .personal-project-card {
+  position: relative;
+  overflow: hidden;
+
+  padding: 2rem;
+
   background: linear-gradient(
     135deg,
     var(--bg-secondary) 0%,
     var(--bg-tertiary) 100%
   );
+
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 2rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
+/* Accent line */
 .personal-project-card::before {
-  content: '';
+  content: "";
+
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 270deg,
-    #00d4ff 360deg
+  inset: 0 0 auto 0;
+
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    var(--accent-cyan),
+    var(--accent-orange)
   );
-  border-radius: 1rem;
-  opacity: 0;
-  transition: opacity 0.3s;
-  animation: rotate 3s linear infinite;
-  animation-play-state: paused;
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  transition: transform 0.3s ease;
 }
 
-.personal-project-card:hover::before {
-  opacity: 1;
-  animation-play-state: running;
+/* Hover state */
+@media (hover: hover) {
+  .personal-project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgb(0 0 0 / 30%);
+  }
+
+  .personal-project-card:hover::before {
+    transform: scaleX(1);
+  }
 }
 
-.personal-project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .personal-project-card,
+  .personal-project-card::before {
+    transition: none;
+  }
+
+  .personal-project-card:hover {
+    transform: none;
+  }
 }
+
 
 /* Contact Section */
 .contact-grid {
